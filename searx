@@ -39,7 +39,7 @@ if { $query == "" } {
     exit 1
 }
 
-set wrap params(w)
+set wrap $params(w)
 set engines $params(e)
 
 proc wordwrap {max msg} {
@@ -70,7 +70,7 @@ foreach result [dict get $reply results] {
     vt::sda_nobold
     if {[dict exists $result content] &&
         [dict get $result content] != ""} {
-        vt::wr "[wordwrap $wrap [dict get $result content]]\n"
+        vt::wr "[wordwrap $wrap [dict get $result content]]"
     }
     vt::sda_underline
     vt::wr "[dict get $result url]"
