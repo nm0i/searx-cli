@@ -1,0 +1,58 @@
+#!/usr/bin/tclsh
+
+# Recirects are not supported
+set searxURL "https://me0w.net/s/search" 
+set engines "duckduckgo,google,bing"
+set wrap 72
+
+package require http
+package require tls
+package require json
+
+package require term::ansi::send
+term::ansi::send::import vt
+vt::init
+
+set query [lindex $argv 0]
+
+if { $query == "" } {
+    vt::wr "Empty query"
+    exit
+}
+
+proc wordwrap {max msg} {
+    if { [string length $msg] > $max } {
+        regsub -all "(.{1,$max})( +|$)" $msg "\\1\\3\n" msg
+    }
+    return $msg
+}
+
+http::register https 443 tls::socket
+set httpToken [::http::config -urlencoding utf-8]
+
+if [catch {
+    set httpToken [::http::geturl "${searxURL}?[::http::formatQuery q ${query} format json engines ${engines} ]"]
+    set reply [::json::json2dict [::http::data $httpToken]]
+    http::cleanup $httpToken
+    http::unregister https
+}] {
+    vt::wr "Query error"
+    exit
+}
+
+foreach result [dict get $reply results] {
+    if [catch {
+        vt::sda_bold
+        vt::wr "[dict get $result title]\n"
+        vt::sda_nobold
+        vt::wr "[wordwrap $wrap [dict get $result content]]"
+        vt::sda_underline
+        vt::wr "[dict get $result url]"
+        vt::sda_nounderline
+    }] {
+        vt::wr "Missing data"
+    }
+    vt::wr "\n\n"
+}
+vt::sda_reset
+
