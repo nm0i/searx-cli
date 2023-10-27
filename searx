@@ -14,7 +14,7 @@ set options {
     {e.arg "" "Comma-separated list of engines to query"}
     {c.arg 72 "Wrap column for description"}
     {nd "Do not display descriptions"}    
-    {n.arg 50 "Limit number of displayed results"}
+    {n.arg 10 "Limit number of displayed results"}
 }
 set usage ": searx \[options] query ...\noptions:"
 
