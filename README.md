@@ -38,7 +38,7 @@ Then put searx somewhere in your $PATH
 
     ~> searx -n 2 wikipedia
     
-    **1: Wikipedia**
+    1: Wikipedia
     Wikipedia is a free online encyclopedia, created and edited by
     volunteers around the world and hosted by the Wikimedia Foundation.The
     English rock band the Kinks staged their first concert tou…The United
@@ -48,7 +48,7 @@ Then put searx somewhere in your $PATH
     fiction horror drama t…Penny Mordaunt - Wikipedia
     https://www.wikipedia.org/
     
-    **2: Wikipedia**
+    2: Wikipedia
     Wikipedia is a free-content online encyclopedia written and maintained
     by a community of volunteers, collectively known as Wikipedians, through
     open collaboration and using a wiki-based editing system called
