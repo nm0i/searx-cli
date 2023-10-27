@@ -18,9 +18,10 @@ if {[info exists ::env(SEARX_ENDPOINT)]} {
 }
 
 set options {
-    {p.arg 1  "Search page number. Defaults to the first page"}
-    {e.arg "" "Comma-separated list of engines to query. Defaults to instance engines"}
+    {p.arg 1  "Search page number"}
+    {e.arg "" "Comma-separated list of engines to query"}
     {w.arg 72 "Wrap column for query content"}
+    {n.arg 50 "Limit number of displayed results"}
 }
 set usage ": searx \[options] query ...\noptions:"
 
@@ -41,6 +42,7 @@ if { $query == "" } {
 
 set wrap $params(w)
 set engines $params(e)
+set maxResults $params(n)
 
 proc wordwrap {max msg} {
     if { [string length $msg] > $max } {
@@ -64,6 +66,7 @@ set reply [::json::json2dict [::http::data $httpToken]]
 http::cleanup $httpToken
 http::unregister https
 
+set resultN 1
 foreach result [dict get $reply results] {
     vt::sda_bold
     vt::wr "[dict get $result title]\n"
@@ -76,6 +79,12 @@ foreach result [dict get $reply results] {
     vt::wr "[dict get $result url]"
     vt::sda_nounderline
     vt::wr "\n\n"
+
+    if { $resultN >= $maxResults } {
+        break
+    } {
+        incr resultN
+    }
 }
 
 vt::sda_reset
