@@ -56,5 +56,25 @@ Then put searx somewhere in your $PATH
     history, and has consistently been one of the 10 most popular websites.
     Founded by Jimmy Wales and Larry Sanger on …
     https://en.wikipedia.org/wiki/Wikipedia
+
+.
     
+    ~> searx -nd -n 5 github markdown syntax
+    
+    1: Getting started with writing and formatting on GitHub
+    https://docs.github.com/articles/markdown-basics
+    
+    2: Basic Syntax | Markdown Guide
+    https://www.markdownguide.org/basic-syntax/
+    
+    3: Basic writing and formatting syntax - GitHub Docs
+    https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax?ref=robert-mizen.ghost.io
+    
+    4: Using Markdown and Liquid in GitHub Docs
+    https://docs.github.com/en/contributing/writing-for-github-docs/using-markdown-and-liquid-in-github-docs
+    
+    5: Learn Markdown Online | How to use markdown tutorial - GitHub …
+    https://learn-markdown.github.io/
+    
+
 
