@@ -13,6 +13,7 @@ set options {
     {p.arg 1  "Search page number"}
     {e.arg "" "Comma-separated list of engines to query"}
     {c.arg 72 "Wrap column for description text"}
+    {nd "Do not display descriptions"}    
     {n.arg 50 "Limit number of displayed results"}
 }
 set usage ": searx \[options] query ...\noptions:"
@@ -43,6 +44,7 @@ if { $query == "" } {
 set wrap $params(c)
 set engines $params(e)
 set maxResults $params(n)
+set showDesc [expr {$params(nd) !=1}]
 
 proc wordwrap {max msg} {
     if { [string length $msg] > $max } {
@@ -69,9 +71,10 @@ http::unregister https
 set resultN 1
 foreach result [dict get $reply results] {
     vt::sda_bold
-    vt::wr "[dict get $result title]\n"
+    vt::wr "$resultN: [dict get $result title]\n"
     vt::sda_nobold
-    if {[dict exists $result content] &&
+    if {$showDesc &&
+        [dict exists $result content] &&
         [dict get $result content] != ""} {
         vt::wr "[wordwrap $wrap [dict get $result content]]"
     }
