@@ -1,4 +1,4 @@
-# Searx2vt #
+# Searx-cli #
 
 Command line (CLI) client for
 [SearxNG](https://github.com/searxng/searxng)
